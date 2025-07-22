@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
+# exit on error
 set -o errexit
 
-# Clean conda environment
-conda clean --all -y
-conda config --set pip_interop_enabled True
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate
 
-# Create fresh conda environment
-conda create -n myenv python=3.9 -y
-conda activate myenv
-
-# Install requirements with conda first, then pip
-conda install --file requirements.txt -y || pip install --no-cache-dir -r requirements.txt
+# Upgrade pip and install requirements
+pip install --upgrade pip
+pip install --no-cache-dir -r requirements.txt
 
 # Django commands
 python manage.py collectstatic --no-input
