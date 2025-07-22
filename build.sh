@@ -8,6 +8,7 @@ python -m venv venv
 source venv/bin/activate
 
 # Upgrade pip and install requirements
+pip install pillow
 pip install --upgrade pip
 pip install --no-cache-dir -r requirements.txt
 
