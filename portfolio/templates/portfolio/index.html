@@ -1,0 +1,232 @@
+```html
+{% extends 'portfolio/base.html' %}
+
+{% block content %}
+<div class="header">
+    {% if profile %}
+        {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="profile-img">
+        {% else %}
+            <div class="profile-img" style="background: #667eea; display: flex; align-items: center; justify-content: center; 
+color: white; font-size: 3em;">
+                {{ profile.name|first }}
+            </div>
+        {% endif %}
+        
+        <h1 class="name">{{ profile.name }}</h1>
+        <p class="title">{{ profile.title }}</p>
+        
+        <div class="social-links">
+            {% if profile.linkedin_url %}
+                <a href="{{ profile.linkedin_url }}" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            {% endif %}
+            {% if profile.github_url %}
+                <a href="{{ profile.github_url }}" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            {% endif %}
+            {% if profile.resume_url %}
+                <a href="{{ profile.resume_url }}" target="_blank">
+                    <i class="fas fa-file-pdf"></i> Resume
+                </a>
+            {% endif %}
+            {% if profile.email %}
+                <a href="mailto:{{ profile.email }}">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            {% endif %}
+        </div>
+    {% else %}
+        <h1 class="name">Your Name</h1>
+        <p class="title">Your Professional Title</p>
+        <div class="social-links">
+            <a href="#" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="#" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<!-- About Section -->
+<section class="section">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-text">
+        {% if profile and profile.about %}
+            {{ profile.about|linebreaks }}
+        {% else %}
+            <p>Write a compelling introduction about yourself, your passion for technology, your career goals, and what makes you 
+unique as a professional. Highlight your key strengths and what you're looking for in your next role.</p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section class="section">
+    <h2 class="section-title">Experience</h2>
+    {% for experience in experiences %}
+        <div class="experience-item">
+            <div class="experience-header">
+                <div>
+                    <h3 class="experience-title">{{ experience.title }}</h3>
+                    <p class="experience-company">{{ experience.company }} - {{ experience.location }}</p>
+                </div>
+                <div class="experience-date">
+                    {{ experience.start_date|date:"M Y" }} - 
+                    {% if experience.end_date %}
+                        {{ experience.end_date|date:"M Y" }}
+                    {% else %}
+                        Present
+                    {% endif %}
+                </div>
+            </div>
+            <p class="experience-description">{{ experience.description }}</p>
+            {% if experience.technologies %}
+                <div class="technologies">
+                    {% for tech in experience.technologies|split:"," %}
+                        <span class="tech-tag">{{ tech|trim }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <div class="experience-item">
+            <div class="experience-header">
+                <div>
+                    <h3 class="experience-title">Senior Software Developer</h3>
+                    <p class="experience-company">Tech Company Inc. - San Francisco, CA</p>
+                </div>
+                <div class="experience-date">Jan 2022 - Present</div>
+            </div>
+            <p class="experience-description">
+                Lead development of scalable web applications serving 100k+ users. Collaborated with cross-functional teams to 
+deliver high-quality software solutions and mentor junior developers.
+            </p>
+            <div class="technologies">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Django</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">PostgreSQL</span>
+            </div>
+        </div>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div>
+                    <h3 class="experience-title">Software Developer</h3>
+                    <p class="experience-company">StartupCo - Remote</p>
+                </div>
+                <div class="experience-date">Jun 2020 - Dec 2021</div>
+            </div>
+            <p class="experience-description">
+                Built and maintained RESTful APIs and responsive web applications. Implemented automated testing and CI/CD 
+pipelines, reducing deployment time by 50%.
+            </p>
+            <div class="technologies">
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Express</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">AWS</span>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+
+<!-- Projects Section -->
+<section class="section">
+    <h2 class="section-title">Featured Projects</h2>
+    {% for project in projects %}
+        <div class="project-item">
+            <div class="project-header">
+                <h3 class="project-title">{{ project.title }}</h3>
+                <div class="project-links">
+                    {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank">
+                            <i class="fab fa-github"></i> Code
+                        </a>
+                    {% endif %}
+                    {% if project.live_url %}
+                        <a href="{{ project.live_url }}" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <p class="experience-description">{{ project.description }}</p>
+            {% if project.technologies %}
+                <div class="technologies">
+                    {% for tech in project.technologies|split:"," %}
+                        <span class="tech-tag">{{ tech|trim }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% empty %}
+        <div class="project-item">
+            <div class="project-header">
+                <h3 class="project-title">E-Commerce Platform</h3>
+                <div class="project-links">
+                    <a href="#" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="#" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </div>
+            <p class="experience-description">
+                Full-stack e-commerce application with user authentication, payment processing, and admin dashboard. Features 
+include product catalog, shopping cart, and order management.
+            </p>
+            <div class="technologies">
+                <span class="tech-tag">Django</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Stripe API</span>
+                <span class="tech-tag">Redis</span>
+            </div>
+        </div>
+        
+        <div class="project-item">
+            <div class="project-header">
+                <h3 class="project-title">Task Management App</h3>
+                <div class="project-links">
+                    <a href="#" target="_blank">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    <a href="#" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                </div>
+            </div>
+            <p class="experience-description">
+                Collaborative task management application with real-time updates, drag-and-drop functionality, and team 
+collaboration features. Built with modern web technologies.
+            </p>
+            <div class="technologies">
+                <span class="tech-tag">Vue.js</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">Socket.io</span>
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Tailwind CSS</span>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+
+{% if profile and profile.email %}
+<div class="contact-info">
+    <h3>Let's Connect</h3>
+    <p>I'm always interested in discussing new opportunities and exciting projects.</p>
+    <p><strong>Email:</strong> <a href="mailto:{{ profile.email }}">{{ profile.email }}</a></p>
+</div>
+{% endif %}
+{% endblock %}
+```
+
