@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
-# exit on error
 set -o errexit
 
-# Clean up any existing pip/conda conflicts
+# Completely clean the environment
 rm -rf ~/.cache/pip
+rm -rf ~/.conda
 
-# Use system Python rather than Conda to avoid conflicts
+# Create fresh virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# Install requirements with no cache
 pip install --upgrade pip
 pip install --no-cache-dir -r requirements.txt
-
-# Add Python user binaries to PATH
-export PATH=$PATH:~/.local/bin
 
 # Django deployment commands
 python manage.py collectstatic --no-input
