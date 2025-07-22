@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 set -o errexit
 
-# Completely clean the environment
-rm -rf ~/.cache/pip
-rm -rf ~/.conda
+# Clean conda environment
+conda clean --all -y
+conda config --set pip_interop_enabled True
 
-# Create fresh virtual environment
-python -m venv venv
-source venv/bin/activate
+# Create fresh conda environment
+conda create -n myenv python=3.9 -y
+conda activate myenv
 
-# Install requirements with no cache
-pip install --upgrade pip
-pip install --no-cache-dir -r requirements.txt
+# Install requirements with conda first, then pip
+conda install --file requirements.txt -y || pip install --no-cache-dir -r requirements.txt
 
-# Django deployment commands
+# Django commands
 python manage.py collectstatic --no-input
 python manage.py migrate
