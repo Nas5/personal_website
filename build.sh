@@ -2,6 +2,7 @@
 # exit on error
 set -o errexit
 
+mkdir -p static
 # Create and activate virtual environment
 python -m venv venv
 source venv/bin/activate
