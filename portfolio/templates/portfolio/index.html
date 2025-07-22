@@ -1,5 +1,5 @@
-```html
 {% extends 'portfolio/base.html' %}
+{% load custom_filters %}
 
 {% block content %}
 <div class="header">
@@ -140,84 +140,43 @@ pipelines, reducing deployment time by 50%.
 
 <!-- Projects Section -->
 <section class="section">
-    <h2 class="section-title">Featured Projects</h2>
-    {% for project in projects %}
-        <div class="project-item">
-            <div class="project-header">
-                <h3 class="project-title">{{ project.title }}</h3>
-                <div class="project-links">
-                    {% if project.github_url %}
-                        <a href="{{ project.github_url }}" target="_blank">
-                            <i class="fab fa-github"></i> Code
-                        </a>
-                    {% endif %}
-                    {% if project.live_url %}
-                        <a href="{{ project.live_url }}" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Live Demo
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-            <p class="experience-description">{{ project.description }}</p>
-            {% if project.technologies %}
-                <div class="technologies">
-                    {% for tech in project.technologies|split:"," %}
-                        <span class="tech-tag">{{ tech|trim }}</span>
-                    {% endfor %}
-                </div>
-            {% endif %}
+<h2 class="section-title">Featured Projects</h2>
+ {% for project in projects %}
+<div class="project-item">
+    <!-- Add the image here -->
+    {% if project.image %}
+        <div class="project-image">
+            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img">
         </div>
-    {% empty %}
-        <div class="project-item">
-            <div class="project-header">
-                <h3 class="project-title">E-Commerce Platform</h3>
-                <div class="project-links">
-                    <a href="#" target="_blank">
-                        <i class="fab fa-github"></i> Code
-                    </a>
-                    <a href="#" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Live Demo
-                    </a>
-                </div>
-            </div>
-            <p class="experience-description">
-                Full-stack e-commerce application with user authentication, payment processing, and admin dashboard. Features 
-include product catalog, shopping cart, and order management.
-            </p>
-            <div class="technologies">
-                <span class="tech-tag">Django</span>
-                <span class="tech-tag">React</span>
-                <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">Stripe API</span>
-                <span class="tech-tag">Redis</span>
-            </div>
+    {% endif %}
+    
+    <div class="project-header">
+        <h3 class="project-title">{{ project.title }}</h3>
+        <div class="project-links">
+         {% if project.github_url %}
+            <a href="{{ project.github_url }}" target="_blank">
+                <i class="fab fa-github"></i> Code
+            </a>
+         {% endif %}
+         {% if project.live_url %}
+            <a href="{{ project.live_url }}" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+         {% endif %}
         </div>
-        
-        <div class="project-item">
-            <div class="project-header">
-                <h3 class="project-title">Task Management App</h3>
-                <div class="project-links">
-                    <a href="#" target="_blank">
-                        <i class="fab fa-github"></i> Code
-                    </a>
-                    <a href="#" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Live Demo
-                    </a>
-                </div>
-            </div>
-            <p class="experience-description">
-                Collaborative task management application with real-time updates, drag-and-drop functionality, and team 
-collaboration features. Built with modern web technologies.
-            </p>
-            <div class="technologies">
-                <span class="tech-tag">Vue.js</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">Socket.io</span>
-                <span class="tech-tag">MongoDB</span>
-                <span class="tech-tag">Tailwind CSS</span>
-            </div>
+    </div>
+    <p class="experience-description">{{ project.description }}</p>
+     {% if project.technologies %}
+        <div class="technologies">
+         {% for tech in project.technologies|split:"," %}
+            <span class="tech-tag">{{ tech|trim }}</span>
+         {% endfor %}
         </div>
-    {% endfor %}
+     {% endif %}
+</div>
+ {% empty %}
+<!-- your fallback content -->
+ {% endfor %}
 </section>
 
 {% if profile and profile.email %}
@@ -228,5 +187,5 @@ collaboration features. Built with modern web technologies.
 </div>
 {% endif %}
 {% endblock %}
-```
+
 

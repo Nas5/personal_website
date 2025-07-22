@@ -4,8 +4,10 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-4fdd!#%teg1$w_9#blh1gnd(qhkpr18x&tg^i#v7s_c8&0j94-'
+
 DEBUG = True
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -54,9 +56,14 @@ DATABASES = {
     }
 }
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+
+# Media files (User uploaded content like images)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
