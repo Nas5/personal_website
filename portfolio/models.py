@@ -21,7 +21,7 @@ class Project(models.Model):
     technologies = models.CharField(max_length=500)
     github_url = models.URLField(blank=True)
     live_url = models.URLField(blank=True)
-    image = models.ImageField(upload_to='projects/', blank=True)
+    image = CloudinaryField('image', blank=True) 
     featured = models.BooleanField(default=False)
     
     def __str__(self):
