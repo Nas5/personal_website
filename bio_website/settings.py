@@ -17,27 +17,30 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com','davidnasonov.com']
 
-print("=== DATABASE DEBUG ===")
-print(f"DATABASE_URL exists: {'DATABASE_URL' in os.environ}")
-print(f"DATABASE_URL value: {os.environ.get('DATABASE_URL', 'NOT SET')}")
+# print("=== DATABASE DEBUG ===")
+# print(f"DATABASE_URL exists: {'DATABASE_URL' in os.environ}")
+# print(f"DATABASE_URL value: {os.environ.get('DATABASE_URL', 'NOT SET')}")
 
-# Database configuration
-if 'DATABASE_URL' in os.environ:
-    print("Using PostgreSQL from DATABASE_URL")
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-    }
-else:
-    print("Using SQLite fallback")
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+DATABASES = {
+    'default': dj_database_url.parse('postgresql://nas:lReX5J3OsEykRL3essozkrfD9oYMox7k@dpg-d1vro8s9c44c73e5b7ag-a/portfolio_db_f9h8')
+}
+# # Database configuration
+# if 'DATABASE_URL' in os.environ:
+#     print("Using PostgreSQL from DATABASE_URL")
+#     DATABASES = {
+#         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+#     }
+# else:
+#     print("Using SQLite fallback")
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
 
-print(f"Final database config: {DATABASES}")
-print("=== END DEBUG ===")
+# print(f"Final database config: {DATABASES}")
+# print("=== END DEBUG ===")
     
 INSTALLED_APPS = [
     'django.contrib.admin',
