@@ -14,7 +14,7 @@ pip list | grep gunicorn
 
 
 # Upgrade pip and install requirements
-pip install pillow
+pip install cloudinary django-cloudinary-storage pillow
 # Django commands
 python manage.py collectstatic --no-input
 python manage.py migrate
