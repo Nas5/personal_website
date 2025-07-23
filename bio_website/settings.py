@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-4fdd!#%teg1$w_9#blh1gnd(qhkpr18x&tg^i#v7s_c8&0j94-
 
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.onrender.com','davidnasonov.com']
 
 # Database configuration
 if 'DATABASE_URL' in os.environ:
