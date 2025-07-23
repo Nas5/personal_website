@@ -4,11 +4,11 @@
 {% block content %}
 <div class="header">
     {% if profile %}
-        {% if profile.profile_image %}
-            <img src="{{ profile.image.url }}" alt="{{ profile.name }}" class="profile-img">
+        {% if profile.image %}  <!-- Ensure this matches your model field name -->
+            {% cloudinary profile.image.url width=150 height=150 crop="fill" gravity="face" class="profile-img" alt=profile.name %}
         {% else %}
             <div class="profile-img" style="background: #667eea; display: flex; align-items: center; justify-content: center; 
-color: white; font-size: 3em;">
+                 color: white; font-size: 3em;">
                 {{ profile.name|first }}
             </div>
         {% endif %}
