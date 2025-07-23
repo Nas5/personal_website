@@ -5,6 +5,10 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
+# Force print during import
+print(f"SETTINGS DEBUG - DATABASE_URL: {os.environ.get('DATABASE_URL')}")
+print(f"SETTINGS DEBUG - Using DATABASE_URL: {'DATABASE_URL' in os.environ}")
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-4fdd!#%teg1$w_9#blh1gnd(qhkpr18x&tg^i#v7s_c8&0j94-'
