@@ -5,7 +5,7 @@
 <div class="header">
     {% if profile %}
         {% if profile.profile_image %}
-            <img src="{{ profile.profile_image.url }}" alt="{{ profile.name }}" class="profile-img">
+            <img src="{{ profile.image.url }}" alt="{{ profile.name }}" class="profile-img">
         {% else %}
             <div class="profile-img" style="background: #667eea; display: flex; align-items: center; justify-content: center; 
 color: white; font-size: 3em;">
