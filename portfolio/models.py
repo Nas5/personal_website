@@ -35,7 +35,7 @@ class Profile(models.Model):
     linkedin_url = models.URLField(blank=True)
     github_url = models.URLField(blank=True)
     resume_url = models.URLField(blank=True)
-    profile_image = models.ImageField(upload_to='profile/', blank=True)
+    image = CloudinaryField('image', blank=True) 
     
     def __str__(self):
         return self.name
