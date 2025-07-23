@@ -41,7 +41,6 @@ staticfiles/
 static_root/
 
 # User-uploaded media files
-media/
 
 # Backup files
 *.bak
